@@ -1,6 +1,7 @@
 from turtle import *
 from random import randint, random
 
+
 start = 0
 coordX =0
 coordY=0
