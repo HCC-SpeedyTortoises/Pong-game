@@ -40,24 +40,55 @@ t0.penup(); #t0.goto(-180,200); t0.pendown();t0.goto(-180, -200); t0.penup()
 # Turtle 1 Creation => Acts as a slider controlled by 'Up' & 'Down' key
 paddle1 = Turtle()
 paddle1.hideturtle()
-
 screen.register_shape("line", ((-sliderW//2,-sliderH//2), (-sliderW//2,sliderH//2), (sliderW//2,sliderH//2), (sliderW//2,-sliderH//2)))
-
 paddle1.shape('line')
 paddle1.speed(0)
 paddle1.color('white')
 paddle1.setheading(90) # face east at beginning
-paddle1.penup();
-paddle1.goto(-totalX//2 + ball_radius, 0)
+paddle1.penup(); paddle1.goto(-totalX//2 + 10, 0);
 paddle1.showturtle()
-#print (paddle1 position:'paddle1.pos())
- 
-def go_up():
-    #print (paddle1 position:'paddle1.pos())
-  paddle1.fd(5)
 
-def go_down():
-  paddle1.bk(5)
+
+
+def paddle1_up():
+    #print ('paddle1 position:',paddle1.pos())
+    paddle1.fd(5)
+
+def paddle1_down():
+    paddle1.bk(5)
+
+def start_game():
+    global start
+    start = 1
+
+screen.onkey(paddle1_up, 'W')
+screen.onkey(paddle1_down, 'S')
+ 
+# Turtle 2 Creation => Acts as a slider controlled by 'W' & 'S' key
+paddle2 = Turtle()
+paddle2.hideturtle()
+screen.register_shape("line", ((-sliderW//2,-sliderH//2), (-sliderW//2,sliderH//2), (sliderW//2,sliderH//2), (sliderW//2,-sliderH//2)))
+paddle2.shape('line')
+paddle2.speed(0)
+paddle2.color('white')
+paddle2.setheading(90) # face east at beginning
+paddle2.penup(); paddle2.goto(-totalX//2 + 390, 0);
+paddle2.showturtle()
+
+
+def paddle2_up():
+    #print ('paddle2 position:',paddle2.pos())
+    paddle2.fd(5)
+
+def paddle2_down():
+    paddle2.bk(5 )
+
+def start_game():
+    global start
+    start = 1
+
+screen.onkey(paddle2_up, 'Up')
+screen.onkey(paddle2_down, 'Down')
 
 def start_game():
     global start
@@ -93,8 +124,6 @@ def pause_game():
     
 # screen.onkey(function, key: when 'key' is pressed, run function 'function'
 screen.onkey(pause_game,'p')
-screen.onkey(go_up, 'Up')
-screen.onkey(go_down, 'Down')
 screen.onkey(start_game, ' ')
 
 # define the ball shape with the coordinates of the corners of a polygon
@@ -107,8 +136,8 @@ screen.register_shape("ball",[
 
 # Turtle 2 Creation => Acts as the ping pong ball 
 ball = Turtle()
-ball.shape('ball'); ball.speed(0)
-ball.color('brown')
+ball.shape('turtle'); ball.speed(0.5)
+ball.color('darkGreen')
 #ball.shapesize(ball_radius, ball_radius)
 ball.penup(); ball.goto(ballX,ballY);paddle1.setheading(90)
 #print ('Ball size:', ball.turtlesize())
@@ -122,6 +151,16 @@ def was_left_paddle_hit():
     return (ballY >= paddle1_bottom 
         and ballY <= paddle1_top 
         and ballX <= paddle1_right + ball_radius)
+
+def was_right_paddle_hit():
+    sliderX, sliderY = paddle2.pos()
+    paddle1_bottom = sliderY - sliderH//2
+    paddle1_top = (sliderY + sliderH//2)
+    paddle1_left = totalX//2 - sliderW
+    
+    return (ballY >= paddle1_bottom 
+        and ballY <= paddle1_top 
+        and ballX >= paddle1_left - ball_radius)
 
 def move_ball():
   try:
@@ -150,6 +189,11 @@ def move_ball():
     # hit on the paddle and bounce off by changing direction 
     if was_left_paddle_hit():
       print("left paddle was hit, bouncing")
+      dX = -dX
+
+    # hit on the paddle and bounce off by changing direction 
+    if was_right_paddle_hit():
+      print("right paddle was hit, bouncing")
       dX = -dX
             
     # if hit right wall, restart and give player 2 a point
