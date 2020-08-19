@@ -81,7 +81,7 @@ def paddle2_up():
     paddle2.fd(5)
 
 def paddle2_down():
-    paddle2.bk(5)
+    paddle2.bk(5 )
 
 def start_game():
     global start
@@ -136,8 +136,8 @@ screen.register_shape("ball",[
 
 # Turtle 2 Creation => Acts as the ping pong ball 
 ball = Turtle()
-ball.shape('ball'); ball.speed(0)
-ball.color('brown')
+ball.shape('turtle'); ball.speed(0.5)
+ball.color('darkGreen')
 #ball.shapesize(ball_radius, ball_radius)
 ball.penup(); ball.goto(ballX,ballY);paddle1.setheading(90)
 #print ('Ball size:', ball.turtlesize())
@@ -151,6 +151,16 @@ def was_left_paddle_hit():
     return (ballY >= paddle1_bottom 
         and ballY <= paddle1_top 
         and ballX <= paddle1_right + ball_radius)
+
+def was_right_paddle_hit():
+    sliderX, sliderY = paddle2.pos()
+    paddle1_bottom = sliderY - sliderH//2
+    paddle1_top = (sliderY + sliderH//2)
+    paddle1_left = totalX//2 - sliderW
+    
+    return (ballY >= paddle1_bottom 
+        and ballY <= paddle1_top 
+        and ballX >= paddle1_left - ball_radius)
 
 def move_ball():
   try:
@@ -179,6 +189,11 @@ def move_ball():
     # hit on the paddle and bounce off by changing direction 
     if was_left_paddle_hit():
       print("left paddle was hit, bouncing")
+      dX = -dX
+
+    # hit on the paddle and bounce off by changing direction 
+    if was_right_paddle_hit():
+      print("right paddle was hit, bouncing")
       dX = -dX
             
     # if hit right wall, restart and give player 2 a point
