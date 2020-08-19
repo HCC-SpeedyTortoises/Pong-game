@@ -1,6 +1,5 @@
 from turtle import *
 from random import randint, random
-from time import sleep
 
 start = 0
 coordX =0
