@@ -5,7 +5,7 @@ from time import sleep
 start = 0
 coordX =0
 coordY=0
-
+#a small change
 sliderH, sliderW = 60,20
 
 totalX, totalY = 400, 400
@@ -13,9 +13,7 @@ ballX, ballY = 0.0, 0.0
 collision = 0
 
 dX = random() +1 #randint(1,2)
-dY = random() +1 #randint(1,2)  
-
-
+dY = random() +1 #randint(1,ff2)  
 # Screen initia
 screen = Screen()                        
 screen.setup(totalX+50,totalY+50)
