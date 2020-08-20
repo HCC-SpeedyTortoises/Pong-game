@@ -33,9 +33,9 @@ t0.hideturtle()
 t0.color('black'); t0.speed(50)
 t0.penup(); t0.goto(0,totalY//2+ball_radius); t0.write("Press 'Space' to start", True, align="center")
 t0.penup(); t0.goto(150,totalY//2+10); t0.write("PLAYER 2 : ", True, align = "right")
-t0.penup(); t0.goto(70,totalY//2.5+10); t0.write("player1 control keys are S,W,D ", True, align = "right")
+t0.penup(); t0.goto(70,totalY-120); t0.write("player1 control keys are S,W,D ", True, align = "right")
 t0.penup(); t0.goto(-150,totalY//2+10); t0.write("PLAYER 1 : ", True, align = "left")
-t0.penup(); t0.goto(-80,totalY//2.75+10); t0.write("player2 control keys are arrow keys", True, align = "left")
+t0.penup(); t0.goto(-80,totalY-100); t0.write("player2 control keys are arrow keys", True, align = "left")
 t0.penup(); t0.goto(-totalX//2,-totalY//2); t0.pendown(); t0.goto(-totalX//2,totalY//2); t0.goto(totalX//2,totalY//2); t0.goto(totalX//2,-totalY//2); t0.goto(-totalX//2,-totalY//2); 
 t0.penup(); #t0.goto(-180,200); t0.pendown();t0.goto(-180, -200); t0.penup()
 
