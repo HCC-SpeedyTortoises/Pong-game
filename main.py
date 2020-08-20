@@ -21,7 +21,7 @@ dY = random() +1 #randint(1,2)
 
 # Screen initia
 screen = Screen()                        
-screen.setup(totalX+50,totalY+50)
+screen.setup(totalX+50,totalY+570)
 #screen.screensize(totalX,totalY)
 #screen.title("Ping Pong Game!")
 #print ('Screen size:', screen.screensize())
@@ -33,7 +33,9 @@ t0.hideturtle()
 t0.color('black'); t0.speed(50)
 t0.penup(); t0.goto(0,totalY//2+ball_radius); t0.write("Press 'Space' to start", True, align="center")
 t0.penup(); t0.goto(150,totalY//2+10); t0.write("PLAYER 2 : ", True, align = "right")
+t0.penup(); t0.goto(70,totalY//2.5+10); t0.write("player1 control keys are S,W,D ", True, align = "right")
 t0.penup(); t0.goto(-150,totalY//2+10); t0.write("PLAYER 1 : ", True, align = "left")
+t0.penup(); t0.goto(-80,totalY//2.75+10); t0.write("player2 control keys are arrow keys", True, align = "left")
 t0.penup(); t0.goto(-totalX//2,-totalY//2); t0.pendown(); t0.goto(-totalX//2,totalY//2); t0.goto(totalX//2,totalY//2); t0.goto(totalX//2,-totalY//2); t0.goto(-totalX//2,-totalY//2); 
 t0.penup(); #t0.goto(-180,200); t0.pendown();t0.goto(-180, -200); t0.penup()
 
