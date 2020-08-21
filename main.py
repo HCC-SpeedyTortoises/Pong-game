@@ -229,6 +229,7 @@ def move_ball():
             p2_score_turtle.write(player2_score, align = "left")
             print("player 2 is the winner")
             t0.penup(); t0.goto(50,50); t0.write("player 2 wins the game by: "+str(player2_score-player1_score) +" points", True, align = "right")
+            #prints out the winner on the termination of the game 
 
     # if hit right wall, restart and give player 1 a point
     if ballX > right_wall:
