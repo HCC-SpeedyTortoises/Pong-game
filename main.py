@@ -35,11 +35,13 @@ t0.penup(); t0.goto(0,totalY//2+ball_radius); t0.write("Press 'Space' to start",
 
 t0.penup(); t0.goto(150,totalY//2+10); t0.write("PLAYER 2 : ", True, align = "right")
 
-t0.penup(); t0.goto(70,totalY-120); t0.write("player1 control keys are S,W,D ", True, align = "right")
+t0.penup(); t0.goto(60,totalY-100); t0.write("player1 control keys are S,W,D ", True, align = "right")
 
 t0.penup(); t0.goto(-150,totalY//2+10); t0.write("PLAYER 1 : ", True, align = "left")
 
-t0.penup(); t0.goto(-80,totalY-100); t0.write("player2 control keys are arrow keys", True, align = "left")
+t0.penup(); t0.goto(-80,totalY-120); t0.write("player2 control keys are arrow keys", True, align = "left")
+
+t0.penup(); t0.goto(-30,totalY-80); t0.write("RULES", True, align = "left")
 
 t0.penup(); t0.goto(-totalX//2,-totalY//2); t0.pendown(); t0.goto(-totalX//2,totalY//2); t0.goto(totalX//2,totalY//2); t0.goto(totalX//2,-totalY//2); t0.goto(-totalX//2,-totalY//2); 
 t0.penup(); #t0.goto(-180,200); t0.pendown();t0.goto(-180, -200); t0.penup()
@@ -225,12 +227,17 @@ def move_ball():
             start = 0
             player2_score +=1
             p2_score_turtle.write(player2_score, align = "left")
+            print("player 2 is the winner")
+            t0.penup(); t0.goto(50,50); t0.write("player 2 wins the game by: "+str(player2_score-player1_score) +" points", True, align = "right")
 
     # if hit right wall, restart and give player 1 a point
     if ballX > right_wall:
             start = 0
             player1_score +=1
             p1_score_turtle.write(player1_score, align = "left")
+            print("player 1 is the winner")
+            t0.penup(); t0.goto(70,50); t0.write("player 1 wins the game by: "+str(player1_score-player2_score) +" points", True, align = "right")
+            
    
     # if the game is started, change ball position by the direction it goes in
     if start == 1:
@@ -253,3 +260,5 @@ move_ball()
 
 screen.listen()
 screen.mainloop()
+
+
