@@ -18,6 +18,7 @@ player2_score = 0
 
 dX = random() +1 #randint(1,2)
 dY = random() +1 #randint(1,2)  
+
 # Screen initia
 screen = Screen()                        
 screen.setup(totalX+50,totalY+50)
@@ -31,8 +32,8 @@ t0 = Turtle()
 t0.hideturtle()
 t0.color('black'); t0.speed(50)
 t0.penup(); t0.goto(0,totalY//2+ball_radius); t0.write("Press 'Space' to start", True, align="center")
-t0.penup(); t0.goto(150,totalY//2+10); t0.write("PLAYER 2 : "+str(player1_score), True, align = "right")
-t0.penup(); t0.goto(-150,totalY//2+10); t0.write("PLAYER 1 : "+str(player2_score), True, align = "left")
+t0.penup(); t0.goto(150,totalY//2+10); t0.write("PLAYER 2 : ", True, align = "right")
+t0.penup(); t0.goto(-150,totalY//2+10); t0.write("PLAYER 1 : ", True, align = "left")
 t0.penup(); t0.goto(-totalX//2,-totalY//2); t0.pendown(); t0.goto(-totalX//2,totalY//2); t0.goto(totalX//2,totalY//2); t0.goto(totalX//2,-totalY//2); t0.goto(-totalX//2,-totalY//2); 
 t0.penup(); #t0.goto(-180,200); t0.pendown();t0.goto(-180, -200); t0.penup()
 
@@ -89,6 +90,23 @@ def start_game():
 
 screen.onkey(paddle2_up, 'Up')
 screen.onkey(paddle2_down, 'Down')
+
+# Create a turtle for each player's score. Move them to the correct positions.
+p1_score_turtle = Turtle()
+p1_score_turtle.hideturtle()
+
+p1_score_turtle.penup()
+p1_score_turtle.goto(-90,210)
+p1_score_turtle.pendown()
+
+
+p2_score_turtle = Turtle()
+p2_score_turtle.hideturtle()
+
+p2_score_turtle.penup()
+p2_score_turtle.goto(155,210)
+p2_score_turtle.pendown()
+
 
 def start_game():
     global start
@@ -196,15 +214,19 @@ def move_ball():
       print("right paddle was hit, bouncing")
       dX = -dX
             
-    # if hit right wall, restart and give player 2 a point
+    # if hit left wall, restart and give player 2 a point
     if ballX < left_wall:
             start = 0
             player2_score +=1
+            p2_score_turtle.clear()
+            p2_score_turtle.write(player2_score, align = "left")
 
     # if hit right wall, restart and give player 1 a point
     if ballX > right_wall:
             start = 0
             player1_score +=1
+            p1_score_turtle.clear()
+            p1_score_turtle.write(player1_score, align = "left")
    
     # if the game is started, change ball position by the direction it goes in
     if start == 1:
@@ -227,3 +249,4 @@ move_ball()
 
 screen.listen()
 screen.mainloop()
+
