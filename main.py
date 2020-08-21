@@ -218,12 +218,14 @@ def move_ball():
     if ballX < left_wall:
             start = 0
             player2_score +=1
+            p2_score_turtle.clear()
             p2_score_turtle.write(player2_score, align = "left")
 
     # if hit right wall, restart and give player 1 a point
     if ballX > right_wall:
             start = 0
             player1_score +=1
+            p1_score_turtle.clear()
             p1_score_turtle.write(player1_score, align = "left")
    
     # if the game is started, change ball position by the direction it goes in
