@@ -27,7 +27,7 @@ screen.setup(totalX+50,totalY+50)
 #print ('Screen size:', screen.screensize())
 screen.bgcolor(' light green')
 
-# Turtle 0 Creation => Draws boundaries for the Ping Pong Game
+# Turtle 0 Creation => Draws boundaries for the Ping Pong Game and draws circles (which give extra points)
 t0 = Turtle()
 t0.hideturtle()
 t0.color('black'); t0.speed(50)
@@ -37,6 +37,22 @@ t0.penup(); t0.goto(-150,totalY//2+10); t0.write("PLAYER 1 : ", True, align = "l
 t0.penup(); t0.goto(-totalX//2,-totalY//2); t0.pendown(); t0.goto(-totalX//2,totalY//2); t0.goto(totalX//2,totalY//2); t0.goto(totalX//2,-totalY//2); t0.goto(-totalX//2,-totalY//2); 
 t0.penup(); #t0.goto(-180,200); t0.pendown();t0.goto(-180, -200); t0.penup()
 
+# draw a circle
+t0.goto(100,100)
+t0.pendown()
+t0.color("yellow")
+t0.fillcolor("yellow")
+t0.begin_fill()
+t0.circle(10)
+t0.end_fill()
+
+# test
+t0.penup
+t0.goto(50,50)
+t0.pendown()
+for i in range(4):
+  t0.fd(100)
+  t0.left(90)
 
 # Turtle 1 Creation => Acts as a slider controlled by 'Up' & 'Down' key
 paddle1 = Turtle()
@@ -190,8 +206,7 @@ def move_ball():
     global start
     global player1_score, player2_score
 
-    #print(ballX, ballY)
-    ball.goto(ballX, ballY)
+    last_paddle_hit = 0
 
     right_wall = totalX//2 - ball_radius
     left_wall = - totalX//2 + ball_radius
@@ -208,11 +223,13 @@ def move_ball():
     if was_left_paddle_hit():
       print("left paddle was hit, bouncing")
       dX = -dX
+      last_paddle_hit = 1
 
     # hit on the paddle and bounce off by changing direction 
     if was_right_paddle_hit():
       print("right paddle was hit, bouncing")
       dX = -dX
+      last_paddle_hit = 2
             
     # if hit left wall, restart and give player 2 a point
     if ballX < left_wall:
@@ -238,9 +255,24 @@ def move_ball():
         ballX = 0
         ballY = 0
     
+    ball.goto(ballX, ballY)
+
+    if 50 < ball.xcor() < 150 and 50 < ball.ycor() < 150:
+      if last_paddle_hit == 1:
+        print("player1 got the square")
+        player1_score += 1
+        p1_score_turtle.clear()
+        p1_score_turtle.write(player1_score, align = "left")
+      if last_paddle_hit == 2:
+        print("player2 got the square")
+        player2_score += 1
+        p2_score_turtle.clear()
+        p2_score_turtle.write(player2_score, align = "left")
+
     # move the ball with updates every milisecond
     screen.ontimer(move_ball,1)
-    
+
+
   except Exception as e:
     print("ERROR in move_ball()!")
     print(e)
