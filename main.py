@@ -196,6 +196,8 @@ def was_right_paddle_hit():
         and ballY <= paddle1_top 
         and ballX >= paddle1_left - ball_radius)
 
+last_paddle_hit = 0
+
 def move_ball():
   try:
     global sliderH, sliderW
@@ -205,13 +207,14 @@ def move_ball():
     global collision
     global start
     global player1_score, player2_score
-
-    last_paddle_hit = 0
+    global last_paddle_hit
 
     right_wall = totalX//2 - ball_radius
     left_wall = - totalX//2 + ball_radius
     top_wall = totalY//2 - ball_radius
     bottom_wall = - totalY//2 + ball_radius
+
+    ball.goto(ballX, ballY)
 
     # bounce off walls by changing direction of ball
     if ballY > top_wall:
@@ -229,8 +232,8 @@ def move_ball():
     if was_right_paddle_hit():
       print("right paddle was hit, bouncing")
       dX = -dX
-      last_paddle_hit = 2
-            
+      last_paddle_hit = 2   
+    
     # if hit left wall, restart and give player 2 a point
     if ballX < left_wall:
             start = 0
@@ -254,17 +257,13 @@ def move_ball():
     else: 
         ballX = 0
         ballY = 0
-    
-    ball.goto(ballX, ballY)
 
     if 50 < ball.xcor() < 150 and 50 < ball.ycor() < 150:
       if last_paddle_hit == 1:
-        print("player1 got the square")
         player1_score += 1
         p1_score_turtle.clear()
         p1_score_turtle.write(player1_score, align = "left")
-      if last_paddle_hit == 2:
-        print("player2 got the square")
+      elif last_paddle_hit == 2:
         player2_score += 1
         p2_score_turtle.clear()
         p2_score_turtle.write(player2_score, align = "left")
