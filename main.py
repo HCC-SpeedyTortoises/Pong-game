@@ -28,7 +28,7 @@ screen.setup(totalX+50,totalY+350)
 #screen.screensize(totalX,totalY)
 #screen.title("Ping Pong Game!")
 #print ('Screen size:', screen.screensize())
-screen.bgcolor(39,)
+screen.bgcolor(153,255,255)
 
 # https://www.rapidtables.com/web/color/RGB_Color.html
 # screen.bgcolor(((r, g, b))
@@ -60,8 +60,8 @@ mango.speed(0)
 
 def teleport_mango():
   # generate random position
-  mangoX = randrange(-totalX//2,totalX//2)
-  mangoY = randrange(-totalY//2,totalY//2)
+  mangoX = randrange(-totalX//2 +10, totalX//2 -10)
+  mangoY = randrange(-totalY//2 +10, totalY//2 -10)
   # go to that position
   mango.goto(mangoX,mangoY)
 
@@ -88,7 +88,7 @@ paddle1.hideturtle()
 screen.register_shape("line", ((-sliderW//2,-sliderH//2), (-sliderW//2,sliderH//2), (sliderW//2,sliderH//2), (sliderW//2,-sliderH//2)))
 paddle1.shape('line')
 paddle1.speed(0)
-paddle1.color((139,69,19))
+paddle1.color((94,44,0))
 # screen.bgcolor(((r, g, b))
 #screen.bgcolor((50, 50, 200))
 paddle1.setheading(90) # face east at beginning
@@ -114,7 +114,7 @@ paddle2.hideturtle()
 screen.register_shape("line", ((-sliderW//2,-sliderH//2), (-sliderW//2,sliderH//2), (sliderW//2,sliderH//2), (sliderW//2,-sliderH//2)))
 paddle2.shape('line')
 paddle2.speed(0)
-paddle2.color((139,69,19))
+paddle2.color((94,44,0))
 paddle2.setheading(90) # face east at beginning
 paddle2.penup(); paddle2.goto(-totalX//2 + 390, 0);
 paddle2.showturtle()
@@ -319,4 +319,3 @@ move_ball()
 
 screen.listen()
 screen.mainloop()
-
